@@ -18,17 +18,17 @@ def process_link(title: str, link: str) -> str:
 
 def generate_feed() -> str:
     soup = BeautifulSoup(get_html(), "html.parser")
-    links = "\n".join([
+    links = "\n\t\t\t".join([
         process_link(link.text, link["href"])
         for link in soup.find_all("a", "bookmark_title")
     ])
     
-    return dedent(f"""
+    return dedent(f"""\
     <rss version="2.0">
         <channel>
             <title>Pinboard Popular</title>
             <link>{URL}</link>
-            <description>Pinboard popular</dscription>
+            <description>Pinboard popular</description>
             {links}
         </channel>
     </rss>
